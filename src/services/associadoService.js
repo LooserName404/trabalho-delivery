@@ -109,7 +109,6 @@ async function autenticar(cnpj, senha) {
 
 function gerarToken(associado) {
   const secret = process.env.TOKEN_SECRET
-  console.log(associado.senha)
   if (associado.senha != undefined) throw new Error()
   const token = jwt.sign(associado, secret, { expiresIn: 82800 })
   return token

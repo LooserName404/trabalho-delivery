@@ -1,4 +1,5 @@
 const Cliente = require('../models/Cliente')
+const ClienteAssociado = require('../models/ClienteAssociado')
 const isNullOrUndefined = require('../helpers/isNullOrUndefined')
 const { Result } = require('../helpers/result')
 
@@ -15,6 +16,12 @@ function findById(id) {
 function findByCnpj(cnpj) {
   return Cliente.findOne({ where: { cnpj } })
     .then(cliente => !isNullOrUndefined(cliente) ? cliente : null)
+    .catch(() => null)
+}
+
+function findByAssociado(id_associado) {
+  return ClienteAssociado.findAll({ where: { id_associado } })
+    .then(async relacoes => await Promise.all(relacoes.map(r => r.getCliente())))
     .catch(() => null)
 }
 
@@ -42,6 +49,7 @@ module.exports = {
   findAll,
   findById,
   findByCnpj,
+  findByAssociado,
   insert,
   update,
   deleteByCnpj

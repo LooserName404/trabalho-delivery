@@ -40,7 +40,6 @@ async function removerAssociado(req, res) {
 }
 
 async function autenticar(req, res) {
-  console.log('hioio')
   const { cnpj, senha } = req.body
   const { data, result, message } = await associadoService.autenticar(cnpj, senha)
   if (result == ResultType.Fail) return res.status(400).json({ message, details: data })

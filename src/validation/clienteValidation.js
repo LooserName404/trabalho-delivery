@@ -11,6 +11,15 @@ const cadastrarClienteDtoValidationSchema = Joi.object({
   endereco: Joi.string().required().messages({ 'any.required': "O campo 'endereco' é obrigatório." })
 })
 
+const atualizarClienteDtoValidationSchema = Joi.object({
+  nome: Joi.string().alphanum().min(3).messages({
+    'string.alphanum': 'O nome deve ser alfanumérico.',
+    'string.min': 'O nome deve conter 3 ou mais caracteres.',
+  }),
+  endereco: Joi.string().messages({ 'any.required': "O campo 'endereco' é obrigatório." })
+})
+
 module.exports = {
-  cadastrarClienteDtoValidationSchema
+  cadastrarClienteDtoValidationSchema,
+  atualizarClienteDtoValidationSchema
 }
