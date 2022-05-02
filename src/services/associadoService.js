@@ -1,18 +1,24 @@
 const { Result, ResultType } = require('../helpers/result')
 const associadoRepository = require('../repositories/associadoRepository')
 const { cadastrarAssociadoDtoValidationSchema, atualizarAssociadoDtoValidationSchema } = require('../validation/associadoValidation')
-const { cnpjValidationSchema } = require('../validation/generalValidation')
+const { cnpjValidationSchema, senhaValidationSchema } = require('../validation/generalValidation')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
-async function cadastrarAssociado(associado) {
-  const { error } = cadastrarAssociadoDtoValidationSchema.validate(associado)
+async function cadastrarAssociado(cadastrarAssociadoDto) {
+  const { error } = cadastrarAssociadoDtoValidationSchema.validate(cadastrarAssociadoDto)
 
   if (error)
     return Result.Fail('Dados inválidos. Envie todos os campos obrigatórios de forma correta.', error.details)
 
-  const associadoExistente = await associadoRepository.findByCnpj(associado.cnpj)
+  const associadoExistente = await associadoRepository.findByCnpj(cadastrarAssociadoDto.cnpj)
 
   if (associadoExistente != null)
     return Result.Fail('Já existe um associado com este CNPJ.', associadoExistente)
+
+  const salt = bcrypt.genSalt()
+  const hash = bcrypt.hash(cadastrarAssociadoDto.senha, await salt)
+  const associado = { ...cadastrarAssociadoDto, senha: await hash }
 
   const dbCommand = await associadoRepository.insert(associado)
 
@@ -80,10 +86,39 @@ async function removerAssociado(cnpj) {
   return Result.Ok({})
 }
 
+async function autenticar(cnpj, senha) {
+  const fail = Result.Fail('CNPJ e/ou senha incorreto(s)', {})
+
+  const { error: cnpjError } = cnpjValidationSchema.validate(cnpj)
+  if (cnpjError) return fail
+
+  const { error: senhaError } = senhaValidationSchema.validate(senha)
+  if (senhaError) return fail
+
+  const associado = await associadoRepository.findByCnpjWithSenha(cnpj)
+
+  if (associado == null) return fail
+
+  const compare = bcrypt.compare(senha, associado.senha)
+  if (!await compare) return fail
+
+  const { senha: senhaBd, ...associadoSemSenha } = associado
+
+  return Result.Ok({ message: 'Associado autenticado com sucesso', token: gerarToken(associadoSemSenha) })
+}
+
+function gerarToken(associado) {
+  const secret = process.env.TOKEN_SECRET
+  if (associado.senha != undefined) throw new Error()
+  const token = jwt.sign(associado, secret, { expiresIn: 82800 })
+  return token
+}
+
 module.exports = {
   cadastrarAssociado,
   listarTodosAssociados,
   buscarAssociadoPorNome,
   editarPorCnpj,
-  removerAssociado
+  removerAssociado,
+  autenticar
 }
