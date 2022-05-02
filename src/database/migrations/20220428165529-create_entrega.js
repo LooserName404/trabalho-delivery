@@ -15,12 +15,12 @@ module.exports = {
       },
       valor: {
         type: Sequelize.DECIMAL,
-        allowNull: false,
+        allowNull: true,
       },
       status: {
-        type: Sequelize.ENUM,
-        values: ["pendente", "finalizada"],
+        type: Sequelize.ENUM("pendente", "finalizada"),
         allowNull: false,
+        defaultValue: "pendente"
       },
 
       id_motoboy: {

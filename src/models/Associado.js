@@ -16,8 +16,8 @@ class Associado extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasMany(models.ClienteAssociado, { foreignKey: "associadoId" });
-    this.hasMany(models.Entrega, { foreignKey: "associadoId" });
+    this.belongsToMany(models.Cliente, { through: models.ClienteAssociado });
+    this.hasMany(models.Entrega, { foreignKey: "associadoId" })
   }
 }
 

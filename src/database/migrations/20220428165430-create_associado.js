@@ -24,7 +24,7 @@ module.exports = {
       },
       endereco: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
