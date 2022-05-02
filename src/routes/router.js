@@ -10,10 +10,10 @@ router.get("/", (req, res) => {
   res.send("It's working");
 });
 
-router.use("/clienteRouter", clienteRouter);
-router.use("/associadoRouter", associadoRouter);
+router.use("/cliente", clienteRouter);
+router.use("/associado", associadoRouter);
 router.use("/motoboy", motoboyRouter);
-router.use("/entregaRouter", entregaRouter);
+router.use("/entrega", entregaRouter);
 router.use("/clienteAssociadoRouter", clienteAssociadoRouter);
 
 module.exports = router;
