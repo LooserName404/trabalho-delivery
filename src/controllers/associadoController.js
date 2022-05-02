@@ -39,10 +39,19 @@ async function removerAssociado(req, res) {
   return res.status(204).json()
 }
 
+async function autenticar(req, res) {
+  console.log('hioio')
+  const { cnpj, senha } = req.body
+  const { data, result, message } = await associadoService.autenticar(cnpj, senha)
+  if (result == ResultType.Fail) return res.status(400).json({ message, details: data })
+  return res.json(data)
+}
+
 module.exports = {
   cadastrarAssociado,
   listarTodosAssociados,
   buscarAssociadoPorNome,
   editarPorCnpj,
-  removerAssociado
+  removerAssociado,
+  autenticar
 }
