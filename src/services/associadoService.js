@@ -102,13 +102,14 @@ async function autenticar(cnpj, senha) {
   const compare = bcrypt.compare(senha, associado.senha)
   if (!await compare) return fail
 
-  const { senha: senhaBd, ...associadoSemSenha } = associado
+  const { senha: _, ...associadoSemSenha } = associado.dataValues
 
   return Result.Ok({ message: 'Associado autenticado com sucesso', token: gerarToken(associadoSemSenha) })
 }
 
 function gerarToken(associado) {
   const secret = process.env.TOKEN_SECRET
+  console.log(associado.senha)
   if (associado.senha != undefined) throw new Error()
   const token = jwt.sign(associado, secret, { expiresIn: 82800 })
   return token
