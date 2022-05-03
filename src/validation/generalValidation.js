@@ -18,8 +18,13 @@ const senhaValidationSchema = Joi.string()
   .pattern(senhaPattern)
   .required()
   .messages(senhaValidationMessages)
+const senhaOpcionalValidationSchema = Joi.string()
+  .min(8)
+  .pattern(senhaPattern)
+  .messages(senhaValidationMessages)
 
 module.exports = {
   cnpjValidationSchema,
-  senhaValidationSchema
+  senhaValidationSchema,
+  senhaOpcionalValidationSchema
 }

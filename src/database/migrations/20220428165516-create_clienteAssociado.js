@@ -8,15 +8,15 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         references: { model: "Associado", key: "id" },
-        onUpdate: "RESTRICT",
-        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       id_cliente: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         references: { model: "Cliente", key: "id" },
-        onUpdate: "RESTRICT",
+        onUpdate: "CASCADE",
         onDelete: "RESTRICT",
       },
       createdAt: {
@@ -31,7 +31,7 @@ module.exports = {
           "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
         ),
       },
-    });
+    }, {});
   },
 
   async down(queryInterface, Sequelize) {
