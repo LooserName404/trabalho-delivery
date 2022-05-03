@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
         references: { model: 'Cliente', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -35,6 +35,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('clienteAssociado');
+    await queryInterface.dropTable('ClienteAssociado');
   },
 };

@@ -28,8 +28,8 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         references: { model: 'Motoboy', key: 'id' },
-        onUpdate: 'RESTRICT',
-        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
 
       id_associado: {
@@ -37,8 +37,8 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         references: { model: 'Associado', key: 'id' },
-        onUpdate: 'RESTRICT',
-        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
 
       id_cliente: {
@@ -46,8 +46,8 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         references: { model: 'Cliente', key: 'id' },
-        onUpdate: 'RESTRICT',
-        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
 
       createdAt: {
