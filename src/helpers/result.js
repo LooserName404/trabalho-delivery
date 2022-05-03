@@ -9,7 +9,7 @@ const Ok = (obj) => ({
   data: obj
 })
 
-const Fail = (message, obj = null) => ({
+const Fail = (message, obj = {}) => ({
   result: ResultType.Fail,
   message,
   data: obj

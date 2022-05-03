@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 
-module.exports = function autenticar({ associado } = { associado: false }) {
+function autenticar({ associado } = { associado: false }) {
   return function verificarToken(req, res, next) {
     const token = req.headers['x-access-token']
     if (!token) return res.status(401).json({ message: 'Usuário não autenticado' })
@@ -16,4 +16,9 @@ module.exports = function autenticar({ associado } = { associado: false }) {
       next()
     })
   }
+}
+
+module.exports = {
+  authAssociado: autenticar({ associado: true }),
+  authMotoboy: autenticar()
 }
