@@ -1,27 +1,29 @@
 'use strict';
+const bcrypt = require('bcrypt');
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
+    const salt = bcrypt.genSaltSync();
 
     await queryInterface.bulkInsert(
       'Motoboy',
       [
         {
           nome: 'Luiz Henrique Nonato',
-          cpf: '334.553.679-09',
-          senha: '123456',
+          cpf: '33455367909',
+          senha: bcrypt.hashSync('123456', salt),
           telefone: '(41)99758-8978',
         },
         {
           nome: 'Marcelo Rico Binance',
-          cpf: '552.898.777-54',
-          senha: '12346',
+          cpf: '55289877754',
+          senha: bcrypt.hashSync('654321', salt),
           telefone: '(41)98166-1923',
         },
         {
           nome: 'José Pedro da Silva',
-          cpf: '199.098.123-01',
-          senha: '123456',
+          cpf: '19909812301',
+          senha: bcrypt.hashSync('135246', salt),
           telefone: '(41)99690-3090',
         },
       ],
@@ -30,7 +32,7 @@ module.exports = {
 
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.bulkDelete('Motoboy', null, {});
   }
 };

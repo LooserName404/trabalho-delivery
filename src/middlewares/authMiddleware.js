@@ -1,24 +1,24 @@
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken');
 
 function autenticar({ associado } = { associado: false }) {
   return function verificarToken(req, res, next) {
-    const token = req.headers['x-access-token']
-    if (!token) return res.status(401).json({ message: 'Usuário não autenticado' })
+    const token = req.headers['x-access-token'];
+    if (!token) return res.status(401).json({ message: 'Usuário não autenticado' });
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
-      if (err) return res.status(401).json({ message: 'Falha na autenticação do token' })
+      if (err) return res.status(401).json({ message: 'Falha na autenticação do token' });
 
-      if ('cpf' in decoded && associado) return res.status(403).json({ message: 'Acesso negado' })
+      if ('cpf' in decoded && associado) return res.status(403).json({ message: 'Acesso negado' });
 
-      if ('cpf' in decoded) req.motoboy = decoded
-      else if ('cnpj' in decoded) req.associado = decoded
-      else throw new Error()
+      if ('cpf' in decoded) req.motoboy = decoded;
+      else if ('cnpj' in decoded) req.associado = decoded;
+      else throw new Error();
 
-      next()
-    })
-  }
+      next();
+    });
+  };
 }
 
 module.exports = {
   authAssociado: autenticar({ associado: true }),
   authMotoboy: autenticar()
-}
+};

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Entrega", {
+    await queryInterface.createTable('Entrega', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -18,54 +18,54 @@ module.exports = {
         allowNull: true,
       },
       status: {
-        type: Sequelize.ENUM("pendente", "finalizada"),
+        type: Sequelize.ENUM('pendente', 'finalizada'),
         allowNull: false,
-        defaultValue: "pendente"
+        defaultValue: 'pendente'
       },
 
       id_motoboy: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
-        references: { model: "Motoboy", key: "id" },
-        onUpdate: "RESTRICT",
-        onDelete: "RESTRICT",
+        references: { model: 'Motoboy', key: 'id' },
+        onUpdate: 'RESTRICT',
+        onDelete: 'RESTRICT',
       },
 
       id_associado: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
-        references: { model: "Associado", key: "id" },
-        onUpdate: "RESTRICT",
-        onDelete: "RESTRICT",
+        references: { model: 'Associado', key: 'id' },
+        onUpdate: 'RESTRICT',
+        onDelete: 'RESTRICT',
       },
 
       id_cliente: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
-        references: { model: "Cliente", key: "id" },
-        onUpdate: "RESTRICT",
-        onDelete: "RESTRICT",
+        references: { model: 'Cliente', key: 'id' },
+        onUpdate: 'RESTRICT',
+        onDelete: 'RESTRICT',
       },
 
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal(
-          "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+          'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
         ),
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Entrega");
+  async down(queryInterface) {
+    await queryInterface.dropTable('Entrega');
   },
 };

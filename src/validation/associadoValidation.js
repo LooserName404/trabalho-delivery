@@ -1,5 +1,5 @@
-const Joi = require('joi')
-const { cnpjValidationSchema, senhaValidationSchema, senhaOpcionalValidationSchema } = require('./generalValidation')
+const Joi = require('joi');
+const { cnpjValidationSchema, senhaValidationSchema, senhaOpcionalValidationSchema } = require('./generalValidation');
 
 
 const cadastrarAssociadoDtoValidationSchema = Joi.object({
@@ -10,12 +10,12 @@ const cadastrarAssociadoDtoValidationSchema = Joi.object({
     .messages({
       'string.alphanum': 'O nome deve ser alfanumérico.',
       'string.min': 'O nome deve conter 3 ou mais caracteres.',
-      'any.required': "O campo 'nome' é obrigatório."
+      'any.required': 'O campo \'nome\' é obrigatório.'
     }),
   cnpj: cnpjValidationSchema,
   senha: senhaValidationSchema,
   endereco: Joi.string().optional()
-})
+});
 
 const atualizarAssociadoDtoValidationSchema = Joi.object({
   nome: Joi.string()
@@ -27,9 +27,9 @@ const atualizarAssociadoDtoValidationSchema = Joi.object({
     }),
   senha: senhaOpcionalValidationSchema,
   endereco: Joi.string()
-})
+});
 
 module.exports = {
   cadastrarAssociadoDtoValidationSchema,
   atualizarAssociadoDtoValidationSchema
-}
+};

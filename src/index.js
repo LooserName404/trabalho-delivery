@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const router = require("./routes/router");
+const router = require('./routes/router');
 const port = process.env.SYSTEM_PORT || 3333;
-require("./database");
+require('./database');
 
 
 app.use(express.json());

@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 class Cliente extends Sequelize.Model {
   static init(sequelize) {
@@ -16,7 +16,7 @@ class Cliente extends Sequelize.Model {
 
   static associate(models) {
     this.belongsToMany(models.Associado, { through: models.ClienteAssociado, foreignKey: 'id_cliente' });
-    this.hasMany(models.Entrega, { foreignKey: "clienteId" });
+    this.hasMany(models.Entrega, { foreignKey: 'clienteId' });
   }
 }
 

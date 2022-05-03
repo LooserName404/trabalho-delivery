@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 class Motoboy extends Sequelize.Model {
   static init(sequelize) {
@@ -16,7 +16,7 @@ class Motoboy extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Entrega, { foreignKey: "motoboyId" });
+    this.hasMany(models.Entrega, { foreignKey: 'motoboyId' });
   }
 }
 
