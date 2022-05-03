@@ -14,7 +14,10 @@ class Entrega extends Sequelize.Model {
     );
   }
 
-  static associate() {
+  static associate(models) {
+    this.hasOne(models.Associado, { foreignKey: 'id' });
+    this.hasOne(models.Cliente, { foreignKey: 'id' });
+    this.hasOne(models.Motoboy, { foreignKey: 'id' });
   }
 }
 

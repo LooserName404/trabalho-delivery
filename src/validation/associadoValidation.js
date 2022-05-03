@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { cnpjValidationSchema, senhaValidationSchema, senhaOpcionalValidationSchema } = require('./generalValidation');
+const { cnpjValidationSchema, senhaValidationSchema } = require('./generalValidation');
 
 
 const cadastrarAssociadoDtoValidationSchema = Joi.object({
@@ -25,7 +25,7 @@ const atualizarAssociadoDtoValidationSchema = Joi.object({
       'string.alphanum': 'O nome deve ser alfanumérico.',
       'string.min': 'O nome deve conter 3 ou mais caracteres.',
     }),
-  senha: senhaOpcionalValidationSchema,
+  senha: senhaValidationSchema,
   endereco: Joi.string()
 });
 
