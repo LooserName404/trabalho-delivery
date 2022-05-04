@@ -1,21 +1,14 @@
 const Joi = require('joi');
-const { cnpjValidationSchema } = require('./generalValidation');
+const { cnpjValidationSchema, nomeValidationSchema, nomeOpcionalValidationSchema } = require('./generalValidation');
 
 const cadastrarClienteDtoValidationSchema = Joi.object({
-  nome: Joi.string().alphanum().min(3).required().messages({
-    'string.alphanum': 'O nome deve ser alfanumérico.',
-    'string.min': 'O nome deve conter 3 ou mais caracteres.',
-    'any.required': 'O campo \'nome\' é obrigatório.'
-  }),
+  nome: nomeValidationSchema,
   cnpj: cnpjValidationSchema,
   endereco: Joi.string().required().messages({ 'any.required': 'O campo \'endereco\' é obrigatório.' })
 });
 
 const atualizarClienteDtoValidationSchema = Joi.object({
-  nome: Joi.string().alphanum().min(3).messages({
-    'string.alphanum': 'O nome deve ser alfanumérico.',
-    'string.min': 'O nome deve conter 3 ou mais caracteres.',
-  }),
+  nome: nomeOpcionalValidationSchema,
   endereco: Joi.string().messages({ 'any.required': 'O campo \'endereco\' é obrigatório.' })
 });
 
