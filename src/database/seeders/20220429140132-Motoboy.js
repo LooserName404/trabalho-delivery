@@ -11,19 +11,19 @@ module.exports = {
         {
           nome: 'Luiz Henrique Nonato',
           cpf: '33455367909',
-          senha: bcrypt.hashSync('123456', salt),
+          senha: bcrypt.hashSync('Senhaa1!', salt),
           telefone: '(41)99758-8978',
         },
         {
           nome: 'Marcelo Rico Binance',
           cpf: '55289877754',
-          senha: bcrypt.hashSync('654321', salt),
+          senha: bcrypt.hashSync('Senhaa2@', salt),
           telefone: '(41)98166-1923',
         },
         {
           nome: 'José Pedro da Silva',
           cpf: '19909812301',
-          senha: bcrypt.hashSync('135246', salt),
+          senha: bcrypt.hashSync('Senhaa3#', salt),
           telefone: '(41)99690-3090',
         },
       ],

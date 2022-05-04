@@ -11,19 +11,19 @@ module.exports = {
         {
           nome: 'Superdent',
           cnpj: '13678675000190',
-          senha: bcrypt.hashSync('123456', salt),
+          senha: bcrypt.hashSync('Senhaa1!', salt),
           endereco: 'Rua Pinheiro Souza, 110',
         },
         {
           nome: 'Maramar',
           cnpj: '14336122000112',
-          senha: bcrypt.hashSync('654321', salt),
+          senha: bcrypt.hashSync('Senhaa2@', salt),
           endereco: 'Av Getulio Vargas, 3456',
         },
         {
           nome: 'Boom Digital',
           cnpj: '15118403000119',
-          senha: bcrypt.hashSync('135246', salt),
+          senha: bcrypt.hashSync('Senhaa3#', salt),
           endereco: 'Rua Floriano Peixoto, 445',
         },
       ],
