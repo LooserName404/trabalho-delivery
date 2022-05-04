@@ -6,7 +6,11 @@ class Entrega extends Sequelize.Model {
       {
         descricao: Sequelize.STRING,
         valor: Sequelize.DECIMAL,
-        status: Sequelize.STRING,
+        status: {
+          type: Sequelize.ENUM,
+          values: ['pendente', 'finalizada'],
+          defaultValue: 'pendente'
+        },
       },
       {
         sequelize,

@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       valor: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(12, 2),
         allowNull: true,
       },
       status: {

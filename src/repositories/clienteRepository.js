@@ -14,13 +14,13 @@ function findById(id) {
 }
 
 function findByCnpj(cnpj) {
-  return Cliente.findOne({ where: { cnpj } })
+  return Cliente.findOne({ where: { cnpj }})
     .then(cliente => !isNullOrUndefined(cliente) ? cliente : null)
     .catch(() => null);
 }
 
 function findByAssociado(id_associado) {
-  return ClienteAssociado.findAll({ where: { id_associado } })
+  return ClienteAssociado.findAll({ where: { id_associado }})
     .then(async relacoes => await Promise.all(relacoes.map(r => r.getCliente())))
     .catch(() => null);
 }
@@ -32,7 +32,7 @@ function insert(cliente) {
 }
 
 function update(cliente) {
-  return Cliente.update(cliente, { where: { cnpj: cliente.cnpj } })
+  return Cliente.update(cliente, { where: { cnpj: cliente.cnpj }})
     .then(([count]) => count > 0
       ? Result.Ok(cliente)
       : Result.Fail('Nenhum registro encontrado', { cnpj: cliente.cnpj }))
@@ -40,7 +40,7 @@ function update(cliente) {
 }
 
 function deleteByCnpj(cnpj) {
-  return Cliente.destroy({ where: { cnpj } })
+  return Cliente.destroy({ where: { cnpj }})
     .then(count => count > 0)
     .catch(() => false);
 }

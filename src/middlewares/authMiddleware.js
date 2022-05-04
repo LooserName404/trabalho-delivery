@@ -20,5 +20,5 @@ function autenticar({ associado } = { associado: false }) {
 
 module.exports = {
   authAssociado: autenticar({ associado: true }),
-  authMotoboy: autenticar()
+  auth: autenticar()
 };

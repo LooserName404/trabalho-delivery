@@ -7,25 +7,25 @@ function findAll() {
 }
 
 function findById(id) {
-  return Associado.findByPk(id, { attributes: { exclude: ['senha'] } })
+  return Associado.findByPk(id, { attributes: { exclude: ['senha'] }})
     .then(associado => !isNullOrUndefined(associado) ? associado : null)
     .catch(() => null);
 }
 
 function findByName(nome) {
-  return Associado.findOne({ where: { nome }, attributes: { exclude: ['senha'] } })
+  return Associado.findOne({ where: { nome }, attributes: { exclude: ['senha'] }})
     .then(associado => !isNullOrUndefined(associado) ? associado : null)
     .catch(() => null);
 }
 
 function findByCnpj(cnpj) {
-  return Associado.findOne({ where: { cnpj }, attributes: { exclude: ['senha'] } })
+  return Associado.findOne({ where: { cnpj }, attributes: { exclude: ['senha'] }})
     .then(associado => !isNullOrUndefined(associado) ? associado : null)
     .catch(() => null);
 }
 
 function findByCnpjWithSenha(cnpj) {
-  return Associado.findOne({ where: { cnpj } })
+  return Associado.findOne({ where: { cnpj }})
     .then(associado => !isNullOrUndefined(associado) ? associado : null)
     .catch(() => null);
 }
@@ -37,7 +37,7 @@ function insert(associado) {
 }
 
 function update(associado) {
-  return Associado.update(associado, { where: { cnpj: associado.cnpj }, attributes: { } })
+  return Associado.update(associado, { where: { cnpj: associado.cnpj }, attributes: { }})
     .then(([count]) => count > 0
       ? Result.Ok(associado)
       : Result.Fail('Nenhum registro encontrado', { cnpj: associado.cnpj }))
@@ -45,7 +45,7 @@ function update(associado) {
 }
 
 function deleteByCnpj(cnpj) {
-  return Associado.destroy({ where: { cnpj } })
+  return Associado.destroy({ where: { cnpj }})
     .then(count => count > 0)
     .catch(() => false);
 }

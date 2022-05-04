@@ -33,7 +33,10 @@
     ],
     "object-curly-spacing": [
       "error",
-      "always"
+      "always",
+      {
+        "objectsInObjects": false
+      }
     ],
     "comma-spacing": [
       "error",
